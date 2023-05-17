@@ -1,6 +1,5 @@
 # AULA 01
 
-
 ## Back-end
 *Typescript*
 - `npm i typescript -D`
@@ -106,7 +105,7 @@
                     plugins: [],
                 }
             ```
-        - Adicionar `plugins: ['nativwind/babel']` no arquivo `babel.config.js`
+        - Adicionar `plugins: ['nativewind/babel']` no arquivo `babel.config.js`
         - Adicionar o types no arquivo tsconfig.json 
             ```json 
                 {
@@ -119,3 +118,27 @@
                 }
             ```
 
+# AULA 02
+
+*Front-end*
+
+- Baixar Fonte do Google
+    - Não é necessário baixar a fonte ou colocar ela no HTML, pois o Next já possui uma forma integrada de adicionar essas fontes, através da pasta `next/font/google`
+    - Basta nós importarmos a fonte a partir do arquivo layout.tsx
+- Integrar fonte com o Tailwind.css
+    - No arquivo `layout.tsx`
+        - ```javascript
+            const roboto = Roboto({ subsets: ['latin'],  variable: '--font-roboto' })
+            const baiJamjuree = BaiJamjuree({ subsets: ['latin'], weight: '700', variable: '--font-bai-jamjuree' })
+          ```
+        - A propriedade variable será o nome da font na definição do CSS/Tailwind
+    - No arquivo `tailwind.config.js`: 
+        - ```javascript
+            theme: {
+                extend: {
+                fontFamily: {
+                    sans: 'var(--font-roboto)',
+                }
+                },
+            },
+          ```
