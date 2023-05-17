@@ -165,4 +165,10 @@
       }
     ```
     -  No Next quando salvamos dentro da pasta app um arquivo chamado icon.png, ele utiliza ele automaticamente como icone da página
-- **
+- *Página em si*
+    - Instalar icones: `npm i lucide-react` ou `npm i phosphor-icons`[https://lucide.dev/?search=user]
+        - ```javascript
+            import { User } from 'lucide-react';
+          
+          
+          ```
