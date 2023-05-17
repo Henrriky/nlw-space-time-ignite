@@ -142,3 +142,26 @@
                 },
             },
           ```
+
+- Adicionar cores no Tailwind / Paleta de cores geradas automáticamente pelo plugin do Figma `Foundation: Color Generation`
+    - Sobrescrever a propriedade gray da propriedade color no arquivo tailwind.config
+    ```js
+    
+    
+    
+    colors: {
+        gray: {
+          50: '#eaeaea'
+          100: '#bebebf'
+          200: '#9e9ea0'
+          300: '#727275'
+          400: '#56565a'
+          500: '#2c2c31'
+          600: '#28282d'
+          700: '#1f1f23'
+          800: '#18181b'
+          900: '#121215'
+        }
+      }
+    ```
+-  No Next quando salvamos dentro da pasta app um arquivo chamado icon.png, ele utiliza ele automaticamente como icone da página
