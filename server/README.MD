@@ -172,3 +172,16 @@
           
           
           ```
+**Mobile**
+
+- *Instalar fontes no React Native*
+    - Expo Google Fonts --> `npx expo install @expo-google-fonts/roboto @expo-google-fonts/bai-jamjuree expo-font`
+        ```javascript
+            import { useFonts, Roboto_400Regular, Roboto_700Bold } from '@expo-google-fonts/roboto'            
+            const [hasLoadedFonts] = useFonts({
+                Roboto_400Regular,
+                Roboto_700Bold,
+                BaiJamjuree_700bold
+            });
+        ```
+    - Adicionar no tailwindconfig a propriedade fontFamily e passar `title: 'Roboto_700Bold'`
