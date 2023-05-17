@@ -120,12 +120,12 @@
 
 # AULA 02
 
-*Front-end*
+**Front-end**
 
-- Baixar Fonte do Google
+- *Baixar Fonte do Google*
     - Não é necessário baixar a fonte ou colocar ela no HTML, pois o Next já possui uma forma integrada de adicionar essas fontes, através da pasta `next/font/google`
     - Basta nós importarmos a fonte a partir do arquivo layout.tsx
-- Integrar fonte com o Tailwind.css
+- *Integrar fonte com o Tailwind.css*
     - No arquivo `layout.tsx`
         - ```javascript
             const roboto = Roboto({ subsets: ['latin'],  variable: '--font-roboto' })
@@ -143,7 +143,7 @@
             },
           ```
 
-- Adicionar cores no Tailwind / Paleta de cores geradas automáticamente pelo plugin do Figma `Foundation: Color Generation`
+- *Adicionar cores no Tailwind / Paleta de cores geradas automáticamente pelo plugin do Figma `Foundation: Color Generation`*
     - Sobrescrever a propriedade gray da propriedade color no arquivo tailwind.config
     ```js
     
@@ -164,4 +164,5 @@
         }
       }
     ```
--  No Next quando salvamos dentro da pasta app um arquivo chamado icon.png, ele utiliza ele automaticamente como icone da página
+    -  No Next quando salvamos dentro da pasta app um arquivo chamado icon.png, ele utiliza ele automaticamente como icone da página
+- **
