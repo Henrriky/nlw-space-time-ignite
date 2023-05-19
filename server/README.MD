@@ -213,3 +213,14 @@
 - User (1, 1) <-- POSSUI --> (0, N) Memory
 - `npx prisma migrate reset`
 - `npx prisma migrate dev`
+
+*CRUD DAS MEMORIAS*
+- Criar uma route para separar as rotas
+- Criar uma camada de service, aonde fica o serviço do prisma, com a opção de passar os logs para o terminal
+    ```js
+        export const prisma = new PrismaClient({
+            log: ['query']
+        });
+    ```
+- Registrar as rotas da aplicação no arquivo `server.ts`
+- Para validar os parâmetros da requisição vamos utilizar a biblioteca do ZOD `npm i zod`, e evitar o erro do Typescript, pois ele não sabe como vai ser o objeto da requisição
