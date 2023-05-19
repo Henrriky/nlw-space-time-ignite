@@ -224,3 +224,13 @@
     ```
 - Registrar as rotas da aplicação no arquivo `server.ts`
 - Para validar os parâmetros da requisição vamos utilizar a biblioteca do ZOD `npm i zod`, e evitar o erro do Typescript, pois ele não sabe como vai ser o objeto da requisição
+*Instalação do Cors*
+- `npm i @fastify/cors`
+- Todas URLS vão utilizar a sua API
+    ```js
+    app.register(cors, {
+        origin: true
+    })
+
+    //ou origin: ['https://url1', 'https://url2']
+    ```
