@@ -120,7 +120,7 @@
 
 # AULA 02
 
-**Front-end**
+## FRONT-END
 
 - *Baixar Fonte do Google*
     - Não é necessário baixar a fonte ou colocar ela no HTML, pois o Next já possui uma forma integrada de adicionar essas fontes, através da pasta `next/font/google`
@@ -146,9 +146,6 @@
 - *Adicionar cores no Tailwind / Paleta de cores geradas automáticamente pelo plugin do Figma `Foundation: Color Generation`*
     - Sobrescrever a propriedade gray da propriedade color no arquivo tailwind.config
     ```js
-    
-    
-    
     colors: {
         gray: {
           50: '#eaeaea'
@@ -169,8 +166,6 @@
     - Instalar icones: `npm i lucide-react` ou `npm i phosphor-icons`[https://lucide.dev/?search=user]
         - ```javascript
             import { User } from 'lucide-react';
-          
-          
           ```
 **Mobile**
 
@@ -198,3 +193,23 @@
         - Criar o arquivo `metro.config.js`
         - Declarar o tipo svg pois estamos usando typescript
     - Como o Native Wind só aceita aplicação de propriedades css pela classe em Componentes, é necessário tornar o SVG estilizável, através do ``styled``
+
+## BACK-END
+
+*Modelagem do Banco*
+- User
+  * id        String @id @default(uuid())
+  * githubId  Int    @unique
+  * name      String
+  * login     String
+  * avatarUrl String
+- Memory
+  * id        String   @id @default(uuid())
+  * coverUrl  String
+  * content   String
+  * isPublic  Boolean  @default(false)
+  * createdAt DateTime @default(now())
+
+- User (1, 1) <-- POSSUI --> (0, N) Memory
+- `npx prisma migrate reset`
+- `npx prisma migrate dev`
