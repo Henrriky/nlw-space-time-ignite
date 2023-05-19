@@ -185,3 +185,16 @@
             });
         ```
     - Adicionar no tailwindconfig a propriedade fontFamily e passar `title: 'Roboto_700Bold'`
+- *Tela inicial*
+    - O CSS do React Native é convertido no Yoga que é uma biblioteca construída para ele. Porém ela não suporta todas as propriedades do CSS, então vamos ter que utilizar uma imagem como blur
+    - Para utilizar o blur é necessário importar o <ImageBackground></ImageBackground>, que funciona como a criação de uma div com uma <img> dentro 
+        - É necessário definir que todas as imagens do tipo png podem ser importadas
+        ```typescript
+            declare module "*.png"
+        ```
+    - Para usar svg precisamos importar a biblioteca [https://github.com/kristerkari/react-native-svg-transformer]: 
+        - `npx expo install react-native-svg`
+        - `npx install -D react-native-svg-transformer`
+        - Criar o arquivo `metro.config.js`
+        - Declarar o tipo svg pois estamos usando typescript
+    - Como o Native Wind só aceita aplicação de propriedades css pela classe em Componentes, é necessário tornar o SVG estilizável, através do ``styled``
