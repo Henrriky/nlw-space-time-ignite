@@ -234,3 +234,30 @@
 
     //ou origin: ['https://url1', 'https://url2']
     ```
+# AULA 03
+
+## Front-end Web
+
+**Fluxo de authenticação**
+
+- O Github é quem vai fornecer as informações necessárias para a authenticação
+- Na nossa authenticação vamos utilizar o protocolo `OAuth`. Ele nos permite fazer o login dentro de uma aplicação usando uma conta existente em outra aplicação (Google, Facebook, Twitter ou Github).
+- Fluxo:
+    - Usuário Clica no link `fazer login` --> Após ele clicar, redireciona o usuário para pagina de login do github --> Usuario vai logar --> Github verifica se o usuário é valido e vai devolver o usuário (junto com um `?code=asdasdsad`) para o front-end --> Com esse código, nós vamos enviar ele para o back-end e buscar os dados do usuário com o código no github     para poder cadastrar ele no banco de dados
+- É necessário ir até Setting no Github -> Developer Settings -> OAuthApp --> Nome, HomePageURL (URL da APlicação), Authorization callback URL (http://localhost:3000/api/auth/callback)
+    - Após criar ele vai devolver o `client ID`, que é algo muito importante para o login e vamos salvar como variavel de ambiente da aplicação front-end
+    - Generate a new client secrete --> Salvar como variavel de ambiente da aplicação back-end
+- No Next, as variaveis de ambiente que vão ser expostas aos componentes, é obrigatório colocar na variavel `NEXT_PUBLIC_`
+*Obtendo Github code web*
+- Colocar no href do front-end {`https://github.com/login/oauth/authorize?client_id${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID`} 
+- Agora quando a gente logar ele vai reenviar a gente para a página que chamou ele, 
+com o parâmetro `http://localhost:3000/api/auth/callback?code=5123412421412`
+*Separando o front-end em Componentes*
+
+## Back-end
+
+## Front-end Web
+
+## Mobile
+
+## Back-end
