@@ -255,6 +255,32 @@ com o parâmetro `http://localhost:3000/api/auth/callback?code=5123412421412`
 *Separando o front-end em Componentes*
 
 ## Back-end
+*Auth route*
+- `npm i dotenv -D`
+    - `import 'dotenv/config'`
+- `npm i axios`
+    - ```js
+            const accessTokenResponse = await axios.post(
+                "https://github.com/login/oauth/access_token",
+                null,
+                {
+                    params: {
+                        teste: '',
+                    },
+                    headers: {
+                        Accept: 'Application/json',
+                    }
+                })
+
+            const userResponse = await axios.get("https://api.github.com/user", {
+                headers: {
+                    Authorization: `bearer ${access_token}`,
+                }
+            })
+            //Os headers são os metadados da requisição, o Accept especifica qual o tipo de retorno que nós queremos
+            //Os params do axios são as querys da URL
+      ```
+- Agora podemos pegar o código que a gente pega no Front-end quando loga com o Github e enviar para essa rota `register` e ter o `access_token`, que vai permitir o acesso as informações do usuário
 
 ## Front-end Web
 

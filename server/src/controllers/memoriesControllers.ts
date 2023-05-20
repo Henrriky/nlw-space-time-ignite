@@ -1,6 +1,6 @@
-import { FastifyRequest } from "fastify";
-import { prisma } from "../services/prisma";
-import { z } from "zod";
+import { FastifyRequest } from 'fastify';
+import { prisma } from '../services/prisma';
+import { z } from 'zod';
 
 export const getMemories = async () => {
     const memories = await prisma.memory.findMany({
