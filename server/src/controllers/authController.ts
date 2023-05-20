@@ -39,7 +39,6 @@ export const register = async (request: FastifyRequest) => {
             Authorization: `bearer ${access_token}`,
         }
     })
-
     
     const userSchema = z.object({
         id: z.number(),
@@ -48,10 +47,27 @@ export const register = async (request: FastifyRequest) => {
         avatar_url: z.string().url()
     })
     
-    const userInfo = userSchema.parse(userResponse.data)
+    const userInfo = userSchema.parse(userResponse.data);
+
+    let user = await prisma.user.findUnique({
+        where: {
+            githubId: userInfo.id,
+        }
+    })
+
+    if(!user) {
+        user = await prisma.user.create({
+            data: {
+                githubId: userInfo.id,
+                avatarUrl: userInfo.avatar_url,
+                name: userInfo.name,
+                login: userInfo.login
+            }
+        })
+    }
 
     return {
-        user,
+        user
     }
 
 
