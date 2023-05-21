@@ -311,6 +311,33 @@ com o parâmetro `http://localhost:3000/api/auth/callback?code=5123412421412`
 
 ## Front-end Web
 
+*Lidando com a resposta do github e aplicando cookies*
+- Precisamos lidar com o código que o Github devolve com a URL interpolada. No Next, ele permite que a gente criar rotas como se fossem um back-end, para lidar com informações como essa.
+    - Devemos criar a seguinte estrutura de pastas `src/app/auth/callback/route.ts`
+    - Nesse arquivo vamos criar uma função async do tipo `GET`, pois a URL devolvida pelo github vem através do método GET
+    - Para acessar as querys da URL 
+    ```js
+    const { searchParams } = new URL(request.url);
+    const code = searchParams.get('code');
+    ```
+    - `npm i axios` --> Para poder acessar o back-end
+    - Back-end devolve o JWT
+    - Nós vamos guardar esse JWT nos Cookies
+        ```js
+        return NextResponse.redirect(redirectURL, {
+            headers: {
+                'Set-Cookie': `token=${token}; Path=/;` //Path=/ significa que o cookie token poderá ser acessado por toda a aplicação
+            }
+        });
+        ```
+    - Entretanto, mesmo que ele esteja enviando os cookies, ele está expirando de acordo com a sessão, então se o navegador fechar o cookie vai sumir. Para resolver isso precisamos passar um parâmetro chamado `maxage`
+        ```js
+        return NextResponse.redirect(redirectURL, {
+            headers: {
+                'Set-Cookie': `token=${token}; Path=/; max-age=2592000;` //Explicito em segundos
+            }
+        });
+        ```
 ## Mobile
 
 ## Back-end
