@@ -338,6 +338,14 @@ com o parâmetro `http://localhost:3000/api/auth/callback?code=5123412421412`
             }
         });
         ```
+*Gerando dados do usuario na tela através dos cookies*
+
+- Verifica se o usuario está logado 
+    ```js
+        const isAuthenticated = cookies().has("token");
+    ```
+- Para conseguirmos realizar o decode do JWT usamos o `npm i jwt-decode`
+- Agora vamos criar um arquivo dentro da pasta lib chamado `auth.ts` que vai realizar o decode do token e retornar um User para ser usado no componente profile
 ## Mobile
 
 ## Back-end
