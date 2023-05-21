@@ -1,9 +1,16 @@
-import { FastifyRequest } from 'fastify';
+import { FastifyRequest, FastifyReply } from 'fastify';
+// import { FastifyInstance } from 'fastify/types/instance';
 import { prisma } from '../services/prisma';
 import { z } from 'zod';
 
-export const getMemories = async () => {
+//Pegar memorias do usuario
+export const getMemories = async (request: FastifyRequest) => {
+
+
     const memories = await prisma.memory.findMany({
+        where: {
+          userId: request.user.sub,
+        },
         orderBy: {
           createdAt: "asc",
         },
@@ -17,7 +24,9 @@ export const getMemories = async () => {
         };
       });
 }
-export const getMemory = async (request: FastifyRequest) => {
+
+//Pegar memoria se ela for do usuario ou se ela for publica
+export const getMemory = async (request: FastifyRequest, reply: FastifyReply) => {
     const paramsSchema = z.object({
         id: z.string().uuid(),
       });
@@ -29,9 +38,15 @@ export const getMemory = async (request: FastifyRequest) => {
           id,
         },
       });
+
+      if (!memory.isPublic && memory.userId !== request.user.sub) {
+        return reply.status(401).send()
+      }
+
       return memory;
 }
 
+//Criar uma memoria do usuario logado
 export const createMemory = async (request: FastifyRequest) => {
     const bodySchema = z.object({
         content: z.string(),
@@ -43,7 +58,7 @@ export const createMemory = async (request: FastifyRequest) => {
   
       const memory = await prisma.memory.create({
         data: {
-          userId: "2892f57d-875d-4fea-8ef6-e8d9ca89fa16",
+          userId: request.user.sub,
           content,
           coverUrl,
           isPublic,
@@ -52,7 +67,9 @@ export const createMemory = async (request: FastifyRequest) => {
   
       return memory;
 }
-export const updateMemory = async (request: FastifyRequest) => {
+
+//Atualizar uma memoria somente se ela for do usuario
+export const updateMemory = async (request: FastifyRequest, reply: FastifyReply) => {
     const paramsSchema = z.object({
         id: z.string().uuid(),
       });
@@ -65,8 +82,18 @@ export const updateMemory = async (request: FastifyRequest) => {
   
       const { id } = paramsSchema.parse(request.params);
       const { content, coverUrl, isPublic } = bodySchema.parse(request.body);
+
+      let memory = await prisma.memory.findUniqueOrThrow({
+        where: {
+          id,
+        }
+      })
+
+      if (memory.userId !== request.user.sub) {
+        return reply.status(401).send();
+      }
   
-      const memory = await prisma.memory.update({
+      memory = await prisma.memory.update({
         where: {
             id,
         },
@@ -79,17 +106,29 @@ export const updateMemory = async (request: FastifyRequest) => {
   
       return memory;
 }
-export const deleteMemory = async (request: FastifyRequest) => {
+
+export const deleteMemory = async (request: FastifyRequest, reply: FastifyReply) => {
     const paramsSchema = z.object({
         id: z.string().uuid(),
       });
   
       const { id } = paramsSchema.parse(request.params);
+
+      const memory = await prisma.memory.findUniqueOrThrow({
+        where: {
+          id,
+        }
+      })
+
+      if (memory.userId !== request.user.sub) {
+        return reply.status(401).send();
+      }
   
-      const memory = await prisma.memory.delete({
+      await prisma.memory.delete({
         where: {
           id,
         },
       });
-      return memory;
+
+      return { message: "Memory deleted successfully"};
 }

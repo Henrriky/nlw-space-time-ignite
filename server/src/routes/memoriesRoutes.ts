@@ -1,7 +1,11 @@
-import { FastifyInstance } from "fastify";
-import { getMemories, getMemory, createMemory, updateMemory, deleteMemory } from "../controllers/memoriesControllers";
+import { FastifyInstance } from 'fastify';
+import { getMemories, getMemory, createMemory, updateMemory, deleteMemory } from '../controllers/memoriesControllers';
 
 export async function memoriesRoutes(app: FastifyInstance) {
+
+  app.addHook('preHandler', async (request) => {
+    await request.jwtVerify();
+  })
 
   app.get("/memories", getMemories);
   app.get("/memories/:id", getMemory);

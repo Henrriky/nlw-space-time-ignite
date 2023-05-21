@@ -298,6 +298,16 @@ com o parâmetro `http://localhost:3000/api/auth/callback?code=5123412421412`
     
     ```
 - Agora esse token é enviado para o front-end toda vez que ele é logado. Assim ele poderá utilizar o mesmo token para requisições futuras no back-end.
+*Rotas autenticadas*
+- Quando instalamos o @fastify/jwt temos acesso a algumas funções novas do request, como: `request.jwtVerify()`, que verifica se está sendo enviado um token.
+- Quando usar o JWT precisamos criar um tipo para o nosso retorno do JWT `auth.d.ts`
+- Como se tornaria repetitivo aplicar a função request.jwtVerify colocamos o seguinte código no corpo da função do memoriesRoutes 
+    ```js
+    app.addHook('preHandler', async (request) => {
+        await request.jwtVerify();
+    }) 
+    //Antes de executar os middleware de cada rota, execute isso
+    ```
 
 ## Front-end Web
 
