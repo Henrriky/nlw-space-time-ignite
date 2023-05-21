@@ -363,5 +363,11 @@ com o parâmetro `http://localhost:3000/api/auth/callback?code=5123412421412`
 - Como no android não tem cookies vamos usar o pacote (Expo SecureStore)
     - `npx expo i expo-secure-store`
     - `SecureStore.setItemAsync("token", token)`
+*Trocando de rotas*
+- Vamos utilizar o (Expo Router)[https://expo.github.io/router/docs/] para simular a mesma forma que fazemos no Next.js para acessar varias rotas`
+    - `npx expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar react-native-gesture-handler`
+    - Criar a pasta APP que será todas as páginas da aplicação
+    - Importar o  useRouter
+        - `import { useRouter } from 'expo-router'`
 
 ## Back-end
