@@ -359,5 +359,9 @@ com o parâmetro `http://localhost:3000/api/auth/callback?code=5123412421412`
 *Chamar back-end*
 - `npm i axios`
 - Além disso precisamos alterar no app.listen o host para '0.0.0.0'. Outro ponto é que como criamos outro serviço do OAuth no github, é enecessário gerar adicionar os novos client_id e secret nas variaveis de ambiente
+*Salvar o token no android*
+- Como no android não tem cookies vamos usar o pacote (Expo SecureStore)
+    - `npx expo i expo-secure-store`
+    - `SecureStore.setItemAsync("token", token)`
 
 ## Back-end

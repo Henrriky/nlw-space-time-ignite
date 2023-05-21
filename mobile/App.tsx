@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { ImageBackground, Text, TouchableOpacity, View } from 'react-native';
 import { useFonts, Roboto_400Regular, Roboto_700Bold, Roboto_100Thin } from '@expo-google-fonts/roboto'
 import { BaiJamjuree_700Bold } from '@expo-google-fonts/bai-jamjuree';
+import * as SecureStore from 'expo-secure-store'
 
 import blurBg from './src/assets/bg-blur.png';
 import Stripes from './src/assets/stripes.svg';
@@ -41,14 +42,18 @@ export default function App() {
   });
 
   useEffect(() => {
-    if (response?.type === 'success') {
+    if (response?.type === "success") {
       const { code } = response.params;
 
       api.post("/register", {
         code,
       }).then(response => {
         const { token } = response.data;
-        console.log(token);
+        // console.log(token);
+
+        SecureStore.setItemAsync("token", token)
+      }).catch(error => {
+        console.log(error)
       })
 
     }
