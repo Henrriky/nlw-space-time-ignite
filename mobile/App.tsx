@@ -10,6 +10,7 @@ import Logo from './src/assets/nlw-spacetime-logo.svg';
 import { styled } from 'nativewind';
 import { makeRedirectUri, useAuthRequest } from 'expo-auth-session';
 import { useEffect } from 'react';
+import { api } from './src/lib/api';
 const discovery = {
   authorizationEndpoint: 'https://github.com/login/oauth/authorize',
   tokenEndpoint: 'https://github.com/login/oauth/access_token',
@@ -43,7 +44,13 @@ export default function App() {
     if (response?.type === 'success') {
       const { code } = response.params;
 
-      console.log(code);
+      api.post("/register", {
+        code,
+      }).then(response => {
+        const { token } = response.data;
+        console.log(token);
+      })
+
     }
   }, [response]);
 

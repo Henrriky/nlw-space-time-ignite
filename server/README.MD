@@ -357,5 +357,7 @@ com o parâmetro `http://localhost:3000/api/auth/callback?code=5123412421412`
     - É necessário colocar no `Authorization callback URL` `exp://192.168.1.118:19000`
     - Agora devemos seguir a documentação do OAuth  no expo e implementar o OAuth 
 *Chamar back-end*
+- `npm i axios`
+- Além disso precisamos alterar no app.listen o host para '0.0.0.0'. Outro ponto é que como criamos outro serviço do OAuth no github, é enecessário gerar adicionar os novos client_id e secret nas variaveis de ambiente
 
 ## Back-end
