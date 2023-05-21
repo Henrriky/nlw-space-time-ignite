@@ -2,6 +2,8 @@ import 'dotenv/config'
 
 import fastify from 'fastify';
 import cors from '@fastify/cors';
+import jwt from '@fastify/jwt'
+
 import { memoriesRoutes } from './routes/memoriesRoutes';
 import { authRoutes } from './routes/authRoutes';
 
@@ -10,6 +12,10 @@ const app = fastify();
 // CONFIGURAÇÃO DO CORS
 app.register(cors, {
     origin: true
+})
+
+app.register(jwt, {
+    secret: process.env.JWT_SECRET || "spacetime"
 })
 
 // REGISTRO DAS ROTAS

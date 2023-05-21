@@ -281,6 +281,23 @@ com o parâmetro `http://localhost:3000/api/auth/callback?code=5123412421412`
             //Os params do axios são as querys da URL
       ```
 - Agora podemos pegar o código que a gente pega no Front-end quando loga com o Github e enviar para essa rota `register` e ter o `access_token`, que vai permitir o acesso as informações do usuário
+*JWT*
+- Como o access_token expira rápido, não é possível utilizar ele para manter a sessão do nosso usuário
+35:12
+- `npm i @fastify/jwt`
+- No JWT nós utilizamos uma palavra secreta para que ocorra a segurança do nosso token. Ou seja, quem não tiver a palavra secreta usada no back-end não vai conseguir gerar um token válido.
+- Senhas não vao no JWT, pois qualquer um pode decodificar o token. Portanto, ele só é útil para evitar o acesso indevido a uma rota, pois mesmo que o hacker saiba as informações do usuário, caso ele não saiba a chave secreta ele não conseguirá ter um token válido.
+    ```js
+    const token = app.jwt.sign({
+        name: user.name,
+        avatarUrl: user.avatarUrl
+    }, {
+        sub: user.id,
+        expiresIn:'30 days',
+    })
+    
+    ```
+- Agora esse token é enviado para o front-end toda vez que ele é logado. Assim ele poderá utilizar o mesmo token para requisições futuras no back-end.
 
 ## Front-end Web
 

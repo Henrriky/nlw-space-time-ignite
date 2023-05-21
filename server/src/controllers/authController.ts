@@ -1,9 +1,10 @@
 import { FastifyRequest } from 'fastify';
+import { FastifyInstance } from 'fastify/types/instance';
 import { prisma } from '../services/prisma';
 import { z } from 'zod';
 import axios from 'axios';
 
-export const register = async (request: FastifyRequest) => {
+export const register = async (request: FastifyRequest, app: FastifyInstance) => {
 
     const bodySchema = await z.object({
         code: z.string(),
@@ -66,12 +67,14 @@ export const register = async (request: FastifyRequest) => {
         })
     }
 
-    return {
-        user
-    }
+    const token = app.jwt.sign({
+        name: user.name,
+        avatarUrl: user.avatarUrl
+    }, {
+        sub: user.id,
+        expiresIn:'30 days',
+    })
 
-
-
-    
+    return { token }
 
 }
