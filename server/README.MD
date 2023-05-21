@@ -346,6 +346,16 @@ com o parâmetro `http://localhost:3000/api/auth/callback?code=5123412421412`
     ```
 - Para conseguirmos realizar o decode do JWT usamos o `npm i jwt-decode`
 - Agora vamos criar um arquivo dentro da pasta lib chamado `auth.ts` que vai realizar o decode do token e retornar um User para ser usado no componente profile
+
 ## Mobile
+
+*Fluxo authenticação mobile*
+- Vamos usar o pacote (Expo AuthSession)[https://docs.expo.dev/versions/latest/sdk/auth-session/] do EXPO para abrir o navegador quando o usuario clicar em cadastrar memória.
+    - `npx expo install expo-auth-session expo-crypto`
+    - Adicionar um scheme no `app.json`
+- Vamos ter que criar outro registro no github para o mobile
+    - É necessário colocar no `Authorization callback URL` `exp://192.168.1.118:19000`
+    - Agora devemos seguir a documentação do OAuth  no expo e implementar o OAuth 
+*Chamar back-end*
 
 ## Back-end
