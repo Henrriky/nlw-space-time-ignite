@@ -379,5 +379,17 @@ com o parâmetro `http://localhost:3000/api/auth/callback?code=5123412421412`
 *Layout no next*
 - No Next, o Layout é aquilo que não muda na página, por isso temos o arquivo `page` e o arquivo `layout`. Por isso vamos colocar no arquivo layout tudo aquilo que não vai mudar na nossa aplicação. 
     - A propriedade `{children}` do layout.tsx recebe o componente que é renderizado de acordo com a url que o usuario está. Por exemplo, se ele estiver na página inicial, ele vai renderizar o page.tsx no lugar do children.
+
 *Logout*
 - Criar uma nova rota get que limpa os cookies e redireciona para a página principal.
+
+*New memory*
+- Criar uma nova rota de new memory na aplicação
+- Input checkbox
+    - `npm i -D @tailwindcss/forms`
+    - `tailwind.config.js` `plugings: [ require('@tailwindcss/forms')]`
+
+*Middleware no front*
+- O usuário consegue acessar rotas que ele não deveria pela URL se ele não estiver logado. Para evitar esse comportamento, nós usamos algo que é chamado de middleware, que nada mais é do que uma funcionalidade para quando nós queremos barrar com alguma regra o acesso à algum recurso que depende da regra.
+    - No Next nós criamos um arquivo chamada `middleware.ts` na pasta src
+    
