@@ -371,3 +371,13 @@ com o parâmetro `http://localhost:3000/api/auth/callback?code=5123412421412`
         - `import { useRouter } from 'expo-router'`
 
 ## Back-end
+
+# AULA 04
+
+## FRONT
+
+*Layout no next*
+- No Next, o Layout é aquilo que não muda na página, por isso temos o arquivo `page` e o arquivo `layout`. Por isso vamos colocar no arquivo layout tudo aquilo que não vai mudar na nossa aplicação. 
+    - A propriedade `{children}` do layout.tsx recebe o componente que é renderizado de acordo com a url que o usuario está. Por exemplo, se ele estiver na página inicial, ele vai renderizar o page.tsx no lugar do children.
+*Logout*
+- Criar uma nova rota get que limpa os cookies e redireciona para a página principal.
