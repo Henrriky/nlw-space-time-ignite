@@ -395,3 +395,17 @@ com o parâmetro `http://localhost:3000/api/auth/callback?code=5123412421412`
     - Esse arquivo vai ter uma `função` e um objeto que é exportado chamado de `config`, que contém a propriedade `matcher`, que recebe quais são as rotas que você deseja que seja acionado o middleware.
         - Exemplo: `matcher: "/memories/:path*",` Qualquer rota que venha depois de memories
     - Agora podemos redirecionar o usuario se ele não estiver logado e tentar acessar a rota `memories/new`. Mesmo através das rotas ou através do botão cadastrar lembranças do componente `page`.
+
+## MOBILE
+
+- No React Native nós podemos utilizar um layout, que funciona igual ao Next, ou seja, ele utilza um design para todas as outras telas.
+    - Para isso, criamos um componente chamado `_layout.tsx`, programando o que você quer que apareça na tela em todas as outras.
+- Para aparecer a página index.tsx, nós podemos utilizar o `<Slot/>` do `Expo Router`
+    - Porém, se utilizarmos o Slot ele vai realizar uma animação de navegação muito seca, prejudicando a usabilidade do usuario.
+*Stack*
+- A Navegação do tipo `Stack` é mais interessante e funciona como se fosse uma **pilha**, fazendo uma animação quando ocorre a troca de páginas.
+    - Características:
+        - Cria um cabeçalho com o nome da página automaticamente, nesse caso seria o `index.tsx`, que o React native reconhece como a página inicial.
+        - Para esconder esse `cabeçalho`, nós podemos utilizar a propriedade `screenOptions={{ headerShown: false }}`
+        - O fundo branco também é outra coisa que vem automaticamente com o stack, para retirar ele usamos a propriedade `contentStyle={{ backgroundColor: transparent }}`
+- 51:37 --> Erro não redireciona para memories.tsx

@@ -1,16 +1,9 @@
-import { ImageBackground, Text, TouchableOpacity, View } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { makeRedirectUri, useAuthRequest } from 'expo-auth-session';
 import * as SecureStore from 'expo-secure-store'
 import { useRouter } from 'expo-router'
-import { styled } from 'nativewind';
 import { useEffect } from 'react';
 
-import { useFonts, Roboto_400Regular, Roboto_700Bold, Roboto_100Thin } from '@expo-google-fonts/roboto'
-import { BaiJamjuree_700Bold } from '@expo-google-fonts/bai-jamjuree';
-
-import blurBg from '../src/assets/bg-blur.png';
-import Stripes from '../src/assets/stripes.svg';
 import Logo from '../src/assets/nlw-spacetime-logo.svg';
 import { api } from '../src/lib/api';
 
@@ -20,14 +13,11 @@ const discovery = {
   revocationEndpoint: 'https://github.com/settings/connections/applications/5f12a2c88b4762c41881',
 };
 
-
-const StyledStripes = styled(Stripes);
-
 export default function App() {
 
   const router = useRouter();
 
-  const [request, response, signInWithGithub] = useAuthRequest(
+  const [, response, signInWithGithub] = useAuthRequest(
     {
       clientId: '5f12a2c88b4762c41881',
       scopes: ['identity'],
@@ -35,22 +25,15 @@ export default function App() {
         scheme: 'nlwspacetime'
       }),
     },
-    discovery
+    discovery,
   );
-
-
-  const [hasLoadedFonts] = useFonts({
-    Roboto_400Regular,
-    Roboto_700Bold,
-    BaiJamjuree_700Bold,
-  });
 
   async function handleGitHubOAuthCode(code: string) {
     const response = await api.post("/register", {
-        code,
+      code,
     })
 
-    const { token } = response.data; 
+    const { token } = response.data;
 
     await SecureStore.setItemAsync("token", token)
 
@@ -67,29 +50,21 @@ export default function App() {
     }
   }, [response]);
 
-  
-  if (!hasLoadedFonts) {
-    return null;
-  }
 
-  
+
+
 
   return (
-    <ImageBackground 
-      source={blurBg} 
-      className="relative px-8 py-10 bg-gray-900 flex-1 items-center"
-      imageStyle={{ position: "absolute", left: "-50%"}}
-    >
-      <StyledStripes className="absolute left-1"/>
+    <View className="px-8 py-10 flex-1 items-center" >
       <View className="flex-1 items items-center justify-center gap-6">
-        <Logo/>
+        <Logo />
         <View className="space-y-2">
           <Text className="text-gray-50 font-title text-2xl text-center leading-tight">Sua cápsula do tempo</Text>
           <Text className="text-gray-100 font-body text-base text-center leading-relaxed">Colecione momentos marcantes da sua jornada e compartilhe (se quiser) com o mundo!</Text>
         </View>
-        <TouchableOpacity 
-          className="bg-green-500 px-5 py-3 rounded-full" 
-          activeOpacity={0.7} 
+        <TouchableOpacity
+          className="bg-green-500 px-5 py-3 rounded-full"
+          activeOpacity={0.7}
           onPress={() => signInWithGithub()}>
           <Text className="font-alt text-sm text-black ">COMEÇAR A CADASTRAR</Text>
         </TouchableOpacity>
@@ -98,8 +73,6 @@ export default function App() {
       <Text className="text-center font-body text-sm leading-relaxed text-gray-200">
         Feito com 💜 no NLW da Rocketseat
       </Text>
-
-      <StatusBar style="light" translucent />
-    </ImageBackground>
+    </View>
   )
 }
