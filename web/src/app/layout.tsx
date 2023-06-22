@@ -8,7 +8,6 @@ import Profile from '@/components/Profile'
 import SignIn from '@/components/SignIn'
 import Hero from '@/components/Hero'
 import Copyright from '@/components/Copyright'
-import EmptyMemories from '@/components/EmptyMemories'
 import { cookies } from 'next/headers'
 
 
