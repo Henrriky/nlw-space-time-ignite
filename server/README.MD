@@ -4,7 +4,7 @@
 *Typescript*
 - `npm i typescript -D`
 - `npm i @types/node -D`
-- `npx tsc --init` --> Inicia o arquivo de configuração do TypeScript
+- `npx tsc --init` --> Inicinpa o arquivo de configuração do TypeScript
 - `npm i tsx -D` --> Serve para automatizar o processo de compilar arquivo js e executar o arquivo js com node
     - `npx tsx src/server.ts` --> Compila e executa o arquivo server.ts
     - Colocar em um comando menor: 
@@ -391,5 +391,7 @@ com o parâmetro `http://localhost:3000/api/auth/callback?code=5123412421412`
 
 *Middleware no front*
 - O usuário consegue acessar rotas que ele não deveria pela URL se ele não estiver logado. Para evitar esse comportamento, nós usamos algo que é chamado de middleware, que nada mais é do que uma funcionalidade para quando nós queremos barrar com alguma regra o acesso à algum recurso que depende da regra.
-    - No Next nós criamos um arquivo chamada `middleware.ts` na pasta src
-    
+    - No Next nós criamos um arquivo chamado `middleware.ts` na pasta src
+    - Esse arquivo vai ter uma `função` e um objeto que é exportado chamado de `config`, que contém a propriedade `matcher`, que recebe quais são as rotas que você deseja que seja acionado o middleware.
+        - Exemplo: `matcher: "/memories/:path*",` Qualquer rota que venha depois de memories
+    - Agora podemos redirecionar o usuario se ele não estiver logado e tentar acessar a rota `memories/new`. Mesmo através das rotas ou através do botão cadastrar lembranças do componente `page`.
