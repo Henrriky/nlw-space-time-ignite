@@ -408,4 +408,14 @@ com o parâmetro `http://localhost:3000/api/auth/callback?code=5123412421412`
         - Cria um cabeçalho com o nome da página automaticamente, nesse caso seria o `index.tsx`, que o React native reconhece como a página inicial.
         - Para esconder esse `cabeçalho`, nós podemos utilizar a propriedade `screenOptions={{ headerShown: false }}`
         - O fundo branco também é outra coisa que vem automaticamente com o stack, para retirar ele usamos a propriedade `contentStyle={{ backgroundColor: transparent }}`
+        - Podemos criar um Stack.Screen, que é um componente que recebe outros componentes que serão as rotas da aplicação. Além disso, com a propriedade redirect nós conseguimos redirecionar o usuario automaticamente quando o valor da propriedade for `true`
 - 51:37 --> Erro não redireciona para memories.tsx
+- Não queremos que o usuário tenha que ficar logando toda vez que entrar na aplicação, então quando o usuário entrar na aplicação, o componente que é chamado em todas as outras telas `layout.tsx` vai ter uma lógica que faz com que ocorra uma verificação em cima da existência do token, redirecionando ou não o usuário para uma tela sem precisar logar novamente.
+    - `!!token` - o !! converte para um booleano automaticamente a variavel se o token existir, caso ele não exista ele retorna false.
+*Rota new*
+- Para criar a rota new nós usamos o Stack, que vai redirecionar para a página new automaticamente se existir um token.
+- Para pegar o `tamanho da status bar automaticamente` nós usamos uma função chamada de `useSafeAreaInsets()`
+- 1:10:00
+*Scroll*
+- Para usar o scroll precisamos transformar o component `View` em uma `ScrollView`
+    - Na `ScrollView` os estilo são passados pela propriedade `contentContainerStyle`
