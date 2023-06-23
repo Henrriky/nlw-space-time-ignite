@@ -459,6 +459,19 @@ com o parâmetro `http://localhost:3000/api/auth/callback?code=5123412421412`
                 prefix: '/uploads/',
             })
         ```
-    
 
+# AULA 05
+
+- [X] Preview da Mídia
+    - Quando usamos Javascript do lado do client, como por exemplo na reatividade do React nós precisamos usar a diretiva `useClient`
+        - Nas versões mais atualizadas do React, se o javascript utilizado for mínimo nós criamos um componente separado, para não precisar gerar um javascript desnecessário do lado do cliente.
+    - Agora que separamos o MediaPicker precisamos criar um estado para preview e uma função que pega esse valor e atualiza o estado:
+        ```js
+              const [preview, setPreview] = useState<string | null>(null);
+              function onFileSelected (event: ChangeEvent<HTMLInputElement>) {
+                console.log(event.target.files);
+              }
+        ```
+    - Existe uma forma de fazer um `if` ternário sem o `:` que seria o else --> `variavelBooleana && "sim"`
+    - Na função `onFileSelected` vamos criar uma URL para o arquivo através do `URL` do node
     
