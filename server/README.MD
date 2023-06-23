@@ -419,3 +419,46 @@ com o parâmetro `http://localhost:3000/api/auth/callback?code=5123412421412`
 *Scroll*
 - Para usar o scroll precisamos transformar o component `View` em uma `ScrollView`
     - Na `ScrollView` os estilo são passados pela propriedade `contentContainerStyle`
+
+## BACK-END
+
+*Upload de imagens*
+- `npm i @fastify/multipart` --> Permite o envio de informações como upload de imagens
+    - Recebemos esse arquivo pelo multipart form 
+        ```js 
+            //Request recebe o registro do multipart do fastify
+            const upload = await request.file({ //Pegando o arquivo quando a rota é acessada
+                limits: {
+                    fileSize: 5_242_880, // 5mb
+                }
+            });
+
+            if (!upload) { //Verificando se existe um arquivo
+                return reply.status(400).send();       
+            }
+
+            upload.mimetype
+        ```
+    - Vamos criar um uuid e concatenar ele com a extensão do arquivo para poder salva-la de forma única
+    - No node nós temos também a funcionalidade de streaming (carregamento do arquivo aos poucos).
+    - OBS: dirname --> Mostra qual o diretório que o arquivo especificado está
+    - Após utilizar o `streaming` junto com o `multipart` do fasitify nós conseguimos salvar nossa foto quando a requisição é chamada.
+    - 1:31:28 --> Adicionar capa para a memória/url
+        - ```js 
+            const fullUrl = request.protocol.concat('://').concat(request.hostname);
+            const fileUrl = new URL(`/uploads/${fileNameGenerateByIdAndExtension}`, fullUrl).toString();
+          ```
+    **Observação: Quando nós criamos uma aplicação que vai salvar uma imagem é mais interessante utilizar serviços prontos, como: Amazon S3, Google GCS, CloudFare R2**
+    - Agora temos a URL da nossa imagem, entretanto, a nossa aplicação não expõe as pastas do computador, por isso precisamos fazer algo para resolver
+    isso: 
+    - Fazer a pasta do back-end ficar pública `npm i @fastify/static`
+    - Agora a nossa aplicação está com a pasta uploads pública: 
+        - ```js
+            app.register(require('@fastify/static'), {
+                root: resolve(__dirname, '../uploads'),
+                prefix: '/uploads/',
+            })
+        ```
+    
+
+    
