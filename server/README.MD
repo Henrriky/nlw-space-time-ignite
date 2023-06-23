@@ -474,4 +474,14 @@ com o parâmetro `http://localhost:3000/api/auth/callback?code=5123412421412`
         ```
     - Existe uma forma de fazer um `if` ternário sem o `:` que seria o else --> `variavelBooleana && "sim"`
     - Na função `onFileSelected` vamos criar uma URL para o arquivo através do `URL` do node
+- [X] Criando nova memória e enviando para o Back-end
+    - No React nós trabalhamos com o envio de formulário através de função que guardam estado, logo teremos que criar um componente para esse formulário, e criar uma função que vai ser chamada quando o formulario for enviado.
+    - Nessa função vamos ter: 
+        - Uma lógica que `envia a imagem` e `recebe o fileUrl`
+        - Esse `fileUrl`, vai ser enviado junto com as outras informações para a requisição de criar uma nova memória.
+    - Para acessar os `cookies` em um componente com `useClient` é preciso usar a variavel `document.cookie`.
+        - Como o retorno dessa variavel é uma string estranha podemos utilizar a biblioteca `js-cookie` para extrair o token
+    - Por fim, vamos redirecionar o usuario para a página inicial utilizando o `useRoute() e o route.push("/")`.
+
+
     
