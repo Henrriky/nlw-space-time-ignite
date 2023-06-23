@@ -6,8 +6,6 @@ export function MediaPicker() {
 
   const [preview, setPreview] = useState<string | null>(null);
 
-  
-
   function onFileSelected (event: ChangeEvent<HTMLInputElement>) {
     const { files } = event.target;
     if (!files) {
@@ -20,6 +18,7 @@ export function MediaPicker() {
   return (
     <>
       <input 
+        name="coverUrl"
         onChange={onFileSelected} 
         type="file" 
         id="media" 

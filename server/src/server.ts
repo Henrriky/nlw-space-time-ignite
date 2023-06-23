@@ -17,7 +17,7 @@ const app = fastify();
 
 // CONFIGURAÇÃO DO CORS
 app.register(cors, {
-    origin: true
+    origin: true,
 })
 
 //REGISTRO DE DEPENDENCIAS

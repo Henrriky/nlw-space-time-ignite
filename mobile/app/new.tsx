@@ -11,7 +11,7 @@ import Logo from '../src/assets/nlw-spacetime-logo.svg';
 export default function NewMemory() {
 
     const { bottom, top } = useSafeAreaInsets();
-    const [isPublic, setIsPublic] = useState(false);
+    const [ isPublic, setIsPublic ] = useState(false);
 
     return (
         <ScrollView className="flex-1 px-8" contentContainerStyle={{ paddingBottom: bottom, paddingTop: top }}>
