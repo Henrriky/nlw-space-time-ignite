@@ -41,8 +41,6 @@ export default function NewMemory() {
     }
 
     async function handleCreateMemory() {
-        console.log(content);
-        console.log(isPublic);
 
         const token = await SecureStore.getItemAsync('token');
         let coverUrl = '';
@@ -83,7 +81,7 @@ export default function NewMemory() {
     }
 
     return (
-        <ScrollView className="flex-1 px-8" contentContainerStyle={{ paddingBottom: bottom, paddingTop: top }}>
+        <ScrollView className="flex-1 px-8" contentContainerStyle={{ paddingBottom: bottom, paddingTop: top, marginBottom: 20 }}>
             {/*===========HEADER=========== */}
             <View className="flex-row mt-4 items-center justify-between">
                 <Logo />

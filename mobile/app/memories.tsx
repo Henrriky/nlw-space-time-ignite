@@ -1,19 +1,36 @@
+import { useEffect, useState } from 'react';
 import { View, TouchableOpacity, ScrollView, Text, Image } from 'react-native'
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { api } from '../src/lib/api';
 
 import * as SecureStore from 'expo-secure-store';
 import { Link, useRouter } from 'expo-router';
 
+import dayjs from 'dayjs';
+import ptBr from 'dayjs/locale/pt-br'
+
 import Icon from '@expo/vector-icons/Feather'
 import Logo from '../src/assets/nlw-spacetime-logo.svg';
 
+dayjs.locale(ptBr);
 
+interface Memory {
+    coverUrl: string
+    excerpt: string
+    id: string
+    createdAt: string
+}
 
 
 export default function Memories() {
 
     const { bottom, top } = useSafeAreaInsets();
+    const isFocused = useIsFocused();
     const router = useRouter();
+
+    const [memories, setMemories] = useState<Memory[]>([]);
 
     async function signOut() {
 
@@ -21,9 +38,24 @@ export default function Memories() {
         router.push('/');
     }
 
+    async function loadMemories() {
+        const token = await SecureStore.getItemAsync('token');
+
+        const response = await api.get('/memories', {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
+
+        setMemories(response.data);
+    }
+
+    useEffect(() => {
+        loadMemories();
+    }, [isFocused])
 
     return (
-        <ScrollView className="flex-1" contentContainerStyle={{ paddingBottom: bottom, paddingTop: top }}>
+        <ScrollView className="flex-1" contentContainerStyle={{ paddingBottom: bottom+20, paddingTop: top }}>
             {/*===========HEADER=========== */}
             <View className="flex-row mt-4 items-center justify-between px-4">
                 <Logo />
@@ -41,29 +73,33 @@ export default function Memories() {
             </View>
 
             <View className="mt-6 space-y-10">
-                <View className="space-y-4">
-                    <View className="flex-row items-center gap-2">
-                        <View className="h-px w-5 bg-gray-50"/>
-                        <Text className="font-body text-xs text-gray-100">12 de Abril de 2023</Text>
-                    </View>
-                    <View className="space-y-4 px-8">
-                        <Image
-                            className="aspect-video w-full rounded-lg"
-                            source={{ uri: "http://192.168.1.115:3333/uploads/aaf83bad-6c34-447f-a1b3-f8d9ad5412e2.jpg" }}
-                            alt="" />
-                        <Text className="font-body text-base leading-relaxed text-gray-100">
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Praesentium autem at asperiores,
-                            porro explicabo iste laborum eum quos officiis error amet placeat sunt similique
-                            consequuntur perferendis aliquid unde eos nulla.
-                        </Text>
-                        <Link href="/memories/id" asChild>
-                            <TouchableOpacity className="flex-row items-center gap-2">
-                                <Text className="font-body text-sm text-gray-200">Ler mais</Text>
-                                <Icon name="arrow-right" size={16} color="#9e9ea0" />
-                            </TouchableOpacity>
-                        </Link>
-                    </View>
-                </View>
+                {
+                    memories.map(memory => {
+                        return (
+                            <View className="space-y-4" key={memory.id}>
+                                <View className="flex-row items-center gap-2">
+                                    <View className="h-px w-5 bg-gray-50" />
+                                    <Text className="font-body text-xs text-gray-100">{ dayjs(memory.createdAt).format("D[ de ]MMMM[, ]YYYY") }</Text>
+                                </View>
+                                <View className="space-y-4 px-8">
+                                    <Image
+                                        className="aspect-video w-full rounded-lg"
+                                        source={{ uri: memory.coverUrl, }}
+                                        alt="" />
+                                    <Text className="font-body text-base leading-relaxed text-gray-100">
+                                        { memory.excerpt }
+                                    </Text>
+                                    <Link href={`/memories/${memory.id}`} asChild>
+                                        <TouchableOpacity className="flex-row items-center gap-2">
+                                            <Text className="font-body text-sm text-gray-200">Ler mais</Text>
+                                            <Icon name="arrow-right" size={16} color="#9e9ea0" />
+                                        </TouchableOpacity>
+                                    </Link>
+                                </View>
+                            </View>
+                        )
+                    })
+                }
             </View>
         </ScrollView >
     )

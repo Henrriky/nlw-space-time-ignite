@@ -496,4 +496,8 @@ com o parâmetro `http://localhost:3000/api/auth/callback?code=5123412421412`
 - [X] Botão de logout
 - [X] Layout da listagem
 - [X] Buscando memórias na API
+    - Para usar assincronismo no useEffect nós devemos criar uma função async fora do escopo do useEffect e chamar ela dentro dele.
+    - Criar um estado para as memórias da chamada 
+    - Para manipular a data podemos utilizar a biblioteca `npm i dayjs`
+    - Vamos utilizar aqui o isFocused para que seja possível a atualização do componente toda vez que a tela receber o foco.
 

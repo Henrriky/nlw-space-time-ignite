@@ -21,6 +21,7 @@ export const getMemories = async (request: FastifyRequest) => {
           id: memory.id,
           coverUrl: memory.coverUrl,
           excerpt: memory.content.substring(0, 115).concat("..."),
+          createAt: memory.createdAt
         };
       });
 }
