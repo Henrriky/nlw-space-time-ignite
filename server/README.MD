@@ -462,6 +462,7 @@ com o parâmetro `http://localhost:3000/api/auth/callback?code=5123412421412`
 
 # AULA 05
 
+**WEB**
 - [X] Preview da Mídia
     - Quando usamos Javascript do lado do client, como por exemplo na reatividade do React nós precisamos usar a diretiva `useClient`
         - Nas versões mais atualizadas do React, se o javascript utilizado for mínimo nós criamos um componente separado, para não precisar gerar um javascript desnecessário do lado do cliente.
@@ -482,6 +483,13 @@ com o parâmetro `http://localhost:3000/api/auth/callback?code=5123412421412`
     - Para acessar os `cookies` em um componente com `useClient` é preciso usar a variavel `document.cookie`.
         - Como o retorno dessa variavel é uma string estranha podemos utilizar a biblioteca `js-cookie` para extrair o token
     - Por fim, vamos redirecionar o usuario para a página inicial utilizando o `useRoute() e o route.push("/")`.
-
-
-    
+**MOBILE**
+- [X] Selecionando imagem da galeria
+    - Como no React Native nós não possuimos um `form`, nós precisamos anotar cada campo do "formulario" em um estado
+    - Para selecionar uma imagem da galeria vamos utilizar a biblioteca `expo image picker` --> `npx expo install expo-image-picker`
+- [X] Preview da imagem
+    - Para fazer um preview da imagem precisamos salvar a URI da imagem selecionada em um estado, e utilizar o componente `Image` do React Native para poder
+    passar para a propriedade `source` o caminho da imagem que está salvo no estado `preview`
+- [X] Buscando memórias na API
+    - Novamente, vamos precisar criar um `FormData`, pois o back-end recebe um form multipart, para isso precisamos definir um file e simular um arquivo, pois no React Native não temos o arquivo em si igual na web
+    - Devemos também passar para o axios os headers, especificando o `Content-type: multipart/form-data`

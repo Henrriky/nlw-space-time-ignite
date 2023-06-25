@@ -25,6 +25,7 @@ export function NewMemoryForm() {
             //multipart form data
             const uploadFormData = new FormData();
             uploadFormData.set('file', fileToUpload);
+            console.log(uploadFormData)
             
             const uploadResponse = await api.post('/upload', uploadFormData);
 
