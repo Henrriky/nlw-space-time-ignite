@@ -490,6 +490,10 @@ com o parâmetro `http://localhost:3000/api/auth/callback?code=5123412421412`
 - [X] Preview da imagem
     - Para fazer um preview da imagem precisamos salvar a URI da imagem selecionada em um estado, e utilizar o componente `Image` do React Native para poder
     passar para a propriedade `source` o caminho da imagem que está salvo no estado `preview`
-- [X] Buscando memórias na API
+- [X] Criando memórias na API
     - Novamente, vamos precisar criar um `FormData`, pois o back-end recebe um form multipart, para isso precisamos definir um file e simular um arquivo, pois no React Native não temos o arquivo em si igual na web
     - Devemos também passar para o axios os headers, especificando o `Content-type: multipart/form-data`
+- [X] Botão de logout
+- [X] Layout da listagem
+- [X] Buscando memórias na API
+
