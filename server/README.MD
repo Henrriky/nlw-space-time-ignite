@@ -500,4 +500,18 @@ com o parâmetro `http://localhost:3000/api/auth/callback?code=5123412421412`
     - Criar um estado para as memórias da chamada 
     - Para manipular a data podemos utilizar a biblioteca `npm i dayjs`
     - Vamos utilizar aqui o isFocused para que seja possível a atualização do componente toda vez que a tela receber o foco.
+**WEB**
+- [X] Layout da listagem
+- [X] Buscando memórias na API
+    - No NEXT, nós conseguimos em componentes que não usem o 'use client' usar async nas funções e fazer uma chamada HTTP sem useEffect ou estado.
+    - Instalar o Dayjs no ambiente WEB
+    - Usar a tag `Image` do NEXT e configurar no `NExt.config.js` o domínio do nosso servidor
 
+# DESAFIOS
+- [] Edição da memória
+- [] Link para compartilhar memória
+- [] Selecionar data da memória (Date picker)
+- [] Layout responsivo
+- [] Comentar na memória
+- [] Obter uma memória específica
+- [] Procurar pessoas
